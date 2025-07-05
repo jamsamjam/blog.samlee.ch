@@ -72,7 +72,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </article>
       </div>
     )
-  } catch (error) {
+  } catch (_error) {
     notFound()
   }
 }

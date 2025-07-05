@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="max-w-6xl mx-auto p-8">
       <header className="mb-12">
-        <h1 className="text-6xl font-bold mt-4 mb-4">Sam's Blog</h1>
+        <h1 className="text-6xl font-bold mt-4 mb-4">Sam&apos;s Blog</h1>
         <p className="text-2xl text-gray-600 dark:text-gray-400">
           On dev, tech, and whatever else I find interesting
         </p>
