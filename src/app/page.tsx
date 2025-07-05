@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="max-w-4xl mx-auto p-8">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Sam Lee's Blog</h1>
+        <h1 className="text-4xl font-bold mb-4">Sam's Blog</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
           On dev, tech, and whatever else I find interesting
         </p>
@@ -47,6 +47,12 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <footer className="mt-16 pt-8 text-center">
+        <p className="text-gray-500 dark:text-gray-400">
+          © 2025 <Link href="https://samlee.ch"><span className="underline hover:text-gray-700 dark:hover:text-gray-300">Sam Lee</span></Link>. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }
