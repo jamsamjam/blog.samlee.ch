@@ -59,7 +59,7 @@ export default async function PostPage({ params }: PostPageProps) {
             </div>
 
             {post.description && (
-              <p className="text-xl text-gray-600 dark:text-gray-400 border-l-4 border-blue-500 pl-4">
+              <p className="text-2xl text-gray-600 dark:text-gray-400 border-l-4 border-blue-500 pl-4">
                 {post.description}
               </p>
             )}
