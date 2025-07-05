@@ -5,10 +5,10 @@ export default function Home() {
   const posts = getSortedPostsData();
 
   return (
-    <div className="max-w-4xl mx-auto p-8">
+    <div className="max-w-6xl mx-auto p-8">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Sam's Blog</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">
+        <h1 className="text-6xl font-bold mt-4 mb-4">Sam's Blog</h1>
+        <p className="text-2xl text-gray-600 dark:text-gray-400">
           On dev, tech, and whatever else I find interesting
         </p>
       </header>
@@ -22,12 +22,12 @@ export default function Home() {
                   href={`/posts/${post.slug}`}
                   className="group"
                 >
-                  <h2 className="text-2xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
+                  <h2 className="text-3xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
                     {post.title}
                   </h2>
                 </Link>
                 
-                <div className="flex items-center gap-4 text-base text-gray-500 dark:text-gray-400 mb-3">
+                <div className="flex items-center gap-4 text-lg text-gray-500 dark:text-gray-400 mb-3">
                   <time>
                       {new Date(post.date).toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -38,7 +38,7 @@ export default function Home() {
                 </div>
                 
                 {post.description && (
-                  <p className="text-xl text-gray-700 dark:text-gray-300">
+                  <p className="text-2xl text-gray-700 dark:text-gray-300">
                     {post.description}
                   </p>
                 )}
@@ -49,7 +49,7 @@ export default function Home() {
       </main>
 
       <footer className="mt-16 pt-8 text-center">
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-xl text-gray-500 dark:text-gray-400">
           © 2025 <Link href="https://samlee.ch"><span className="underline hover:text-gray-700 dark:hover:text-gray-300">Sam Lee</span></Link>. All rights reserved.
         </p>
       </footer>

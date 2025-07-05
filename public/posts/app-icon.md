@@ -8,7 +8,7 @@ description: "How I fixed the missing app icon issue in Expo builds"
 While building my app with Expo, I ran into a frustrating issue: the app icon wasn’t showing up in the final build. I had the correct `icon` path in `app.json`, but however I tried it didn't work, until I ran..
 
 
-```
+```bash
 npx expo prebuild --clean
 npx expo prebuild
 eas build --platform android --clear-cache
@@ -17,6 +17,5 @@ eas build --platform ios --clear-cache
 
 ![App Store Connect icons](./app-icon/icon.png)
 
-**Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon.
-However, after I uploaded it on Apple Connecct it the icon appeared as expected.
+**Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon. However, after I uploaded it on Apple Connecct it the icon appeared as expected.
 
