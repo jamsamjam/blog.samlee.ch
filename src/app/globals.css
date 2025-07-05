@@ -45,7 +45,6 @@ body {
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
   font-family: var(--font-mono, monospace);
-  font-size: 1.15rem;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -32,11 +32,11 @@ export default function BlogList({ posts }: BlogListProps) {
 
   return (
     <>
-      <nav className="mb-8">
+      <nav className="mb-6">
         <div className="flex flex-wrap gap-4 items-center">
           <button
             onClick={() => setSelectedTag(null)}
-            className={`px-4 py-2 rounded-lg transition-colors ${
+            className={`text-sm px-3 py-2 rounded-lg transition-colors ${
               selectedTag === null 
                 ? 'bg-blue-200 text-white' 
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -51,7 +51,7 @@ export default function BlogList({ posts }: BlogListProps) {
               <button
                 key={tag}
                 onClick={() => setSelectedTag(tag)}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`text-sm px-3 py-2 rounded-lg transition-colors ${
                   selectedTag === tag 
                     ? 'bg-blue-200 text-white' 
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -67,17 +67,17 @@ export default function BlogList({ posts }: BlogListProps) {
         <section>
           <div className="space-y-8">
             {filteredPosts.map((post) => (
-              <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-8">
+              <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-5">
                 <Link 
                   href={`/posts/${post.slug}`}
                   className="group"
                 >
-                  <h2 className="text-3xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
+                  <h2 className="text-xl font-semibold mb-1 group-hover:text-blue-600 transition-colors">
                     {post.title}
                   </h2>
                 </Link>
                 
-                <div className="flex items-center gap-4 text-lg text-gray-500 dark:text-gray-400 mb-3">
+                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
                   <time>
                       {new Date(post.date).toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -88,7 +88,7 @@ export default function BlogList({ posts }: BlogListProps) {
                 </div>
                 
                 {post.description && (
-                  <p className="text-2xl text-gray-700 dark:text-gray-300">
+                  <p className="text-base text-gray-700 dark:text-gray-300">
                     {post.description}
                   </p>
                 )}
