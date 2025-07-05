@@ -1,5 +1,5 @@
 ---
-title: "[Expo Build] App Icon Not Showing?"
+title: "[Expo Build] App Icon Not Showing Up?"
 tags: ["App"]
 date: "2025-05-04T17:59:53.000Z"
 description: "How I fixed the missing app icon issue in Expo builds"

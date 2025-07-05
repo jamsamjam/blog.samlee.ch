@@ -29,7 +29,7 @@ export default async function PostPage({ params }: PostPageProps) {
             href="/" 
             className="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
           >
-            ← back to home
+            ← Back to Home
           </Link>
         </nav>
 
