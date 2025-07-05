@@ -15,7 +15,7 @@ eas build --platform android --clear-cache
 eas build --platform ios --clear-cache
 ```
 
-![App Store Connect icons](./app-icon/icon.png)
+![App Store Connect icons](./icon.png)
 
 **Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon. However, after I uploaded it on Apple Connecct it the icon appeared as expected.
 

@@ -65,3 +65,9 @@ body {
 .prose code::after {
   content: "" !important;
 }
+
+.prose img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
