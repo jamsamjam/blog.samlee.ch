@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSortedPostsData } from "@/lib/posts";
+import BlogList from "@/components/BlogList";
 
 export default function Home() {
   const posts = getSortedPostsData();
@@ -13,40 +14,7 @@ export default function Home() {
         </p>
       </header>
 
-      <main>
-        <section>
-          <div className="space-y-8">
-            {posts.map((post) => (
-              <article key={post.slug} className="border-b border-gray-200 dark:border-gray-700 pb-8">
-                <Link 
-                  href={`/posts/${post.slug}`}
-                  className="group"
-                >
-                  <h2 className="text-3xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
-                    {post.title}
-                  </h2>
-                </Link>
-                
-                <div className="flex items-center gap-4 text-lg text-gray-500 dark:text-gray-400 mb-3">
-                  <time>
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                  </time>
-                </div>
-                
-                {post.description && (
-                  <p className="text-2xl text-gray-700 dark:text-gray-300">
-                    {post.description}
-                  </p>
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
-      </main>
+      <BlogList posts={posts} />
 
       <footer className="mt-16 pt-8 text-center">
         <p className="text-xl text-gray-500 dark:text-gray-400">
