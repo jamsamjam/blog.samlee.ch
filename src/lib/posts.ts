@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import { remark } from 'remark'
 import remarkMath from 'remark-math'
 import remarkBreaks from 'remark-breaks'
+import remarkGithubAlerts from 'remark-github-alerts'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
@@ -69,10 +70,10 @@ export async function getPostData(slug: string): Promise<PostData> {
 
   const matterResult = matter(fileContents)
 
-  // Convert markdown to HTML using remark with math support
   const processedContent = await remark()
     .use(remarkBreaks)
     .use(remarkMath)
+    .use(remarkGithubAlerts)
     .use(remarkRehype)
     .use(rehypeKatex)
     .use(rehypeStringify)
