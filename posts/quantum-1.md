@@ -5,6 +5,9 @@ date: "2025-07-11T16:04:17.000Z"
 description: "An introduction to the fundamental concepts of quantum mechanics"
 ---
 
+>[!Caution] Disclaimer
+> I'm not a physicist, but as I prepare for next semester's physics course, I'll be sharing a series of posts based on *The Feynman Lectures on Physics*. If you're looking for a more in-depth study, I recommend checking out [the original lectures](https://www.feynmanlectures.caltech.edu/III_toc.html). All the pictures (unless otherwise credited) are from the lecture notes.
+
 Quantum entities are neither particles nor clouds.. so how should we define them? Electrons! Their mysterious behavior gives us significant insight into the nature of quantum systems.
 
 ### An experiment with bullets
@@ -56,14 +59,14 @@ Wait — what just happened? When we look at the electrons, their distribution 
 
 
 >[!Note]
->We've seen how electrons, despite being particles, show interference patterns. But why do electrons create the patterns? They don't just take one path. Instead, they *explore all possible paths*, and each path contributes a probability amplitude. These amplitudes interfere — sometimes constructively, sometimes destructively — which leads to the observed pattern.
+>We've seen how electrons, despite being particles, show interference patterns. But why do electrons create the patterns? They don't just take one path. Instead, they *explore all possible paths*, and each path contributes a probability amplitude. These amplitudes interfere — sometimes constructively, sometimes destructively — which leads to the observed pattern.
 >
->But this idea of sum over paths isn't limited to electrons. It applies to photons (particles of light) as well.This is a core idea of quantum theory, often described as Feynman’s *sum over histories*. A great video that gives you an intuition about this (and quantum physics) can be found [here](https://www.youtube.com/watch?v=KTzGBJPuJwM).
+>But this idea of sum over paths isn't limited to electrons. It applies to photons (particles of light) as well. This is a core idea of quantum theory, often described as Feynman’s *sum over histories*. A great video that gives you an intuition about this (and quantum physics) can be found [here](https://www.youtube.com/watch?v=KTzGBJPuJwM).
 
 
 ## Summary
 
-<img src="./summary.png" alt="Summary" width="75%">
+<img src="./summary.png" alt="Summary" width="65%">
 
 Quantum mechanics is different from classical mechanics in a way that we can only predict the odds — we do not know exactly what would happen.
 
