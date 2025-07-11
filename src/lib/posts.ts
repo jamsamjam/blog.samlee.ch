@@ -74,9 +74,9 @@ export async function getPostData(slug: string): Promise<PostData> {
     .use(remarkBreaks)
     .use(remarkMath)
     .use(remarkGithubAlerts)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeKatex)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(matterResult.content)
   let contentHtml = processedContent.toString()
 
