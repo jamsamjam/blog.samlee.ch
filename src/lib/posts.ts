@@ -2,8 +2,11 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
-import html from 'remark-html'
+import remarkMath from 'remark-math'
 import remarkBreaks from 'remark-breaks'
+import remarkRehype from 'remark-rehype'
+import rehypeKatex from 'rehype-katex'
+import rehypeStringify from 'rehype-stringify'
 
 const postsDirectory = path.join(process.cwd(), 'public/posts')
 
@@ -66,14 +69,16 @@ export async function getPostData(slug: string): Promise<PostData> {
 
   const matterResult = matter(fileContents)
 
-  // Convert markdown to HTML using remark
+  // Convert markdown to HTML using remark with math support
   const processedContent = await remark()
     .use(remarkBreaks)
-    .use(html)
+    .use(remarkMath)
+    .use(remarkRehype)
+    .use(rehypeKatex)
+    .use(rehypeStringify)
     .process(matterResult.content)
   let contentHtml = processedContent.toString()
 
-  // Fix image paths for Next.js static serving
   contentHtml = contentHtml.replace(
     /src="\.\/([^"]+)"/g,
     `src="/posts/${slug}/$1"`
