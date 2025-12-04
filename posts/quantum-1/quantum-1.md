@@ -6,7 +6,7 @@ description: "An introduction to the fundamental concepts of quantum mechanics"
 ---
 
 >[!Caution] Disclaimer
-> I'm not a physicist, but as I prepare for next semester's physics course, I'll be sharing a series of posts based on *The Feynman Lectures on Physics*. If you're looking for a more in-depth study, I recommend checking out [the original lectures](https://www.feynmanlectures.caltech.edu/III_toc.html). All the pictures (unless otherwise credited) are from the lecture notes.
+> As I prepare for next semester's physics course, I'll be sharing a series of posts based on *The Feynman Lectures on Physics*. If you're looking for a more in-depth study, I recommend checking out [the original lectures](https://www.feynmanlectures.caltech.edu/III_toc.html). All the pictures (unless otherwise credited) are from the lecture notes.
 
 Quantum entities are neither particles nor clouds.. so how should we define them? Electrons! Their mysterious behavior gives us significant insight into the nature of quantum systems.
 
