@@ -177,12 +177,6 @@ In absolute terms the values are close, but if you experiment with other video p
 
 ![Gromov-Wasserstein Transport Plan](./transport-plan.png)
 
-Well, I find it a bit hard to draw conclusions from the transport plan itself, but looking at the column sums provides some insights.
-
-![Column-sum of Transport Plan](./column-sum.png)
-
-The column sums indicate how much each frame in Video 2 is matched to frames in Video 1. For similar dances, the distribution is more concentrated, suggesting that specific frames correspond closely. In contrast, for different dances, the distribution is more spread out, indicating less direct correspondence.
-
 >[!Important] Summary
 >- GW distance provides a flexible way to compare sequences with different lengths or coordinate systems.
 >- For motion analysis in particular, it captures structural similarity beyond simple time alignment and serves as a strong complement to DTW based methods.
