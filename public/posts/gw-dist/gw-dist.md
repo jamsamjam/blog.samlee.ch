@@ -11,7 +11,7 @@ I’ve been working on a machine learning project involving the comparison of mo
  
 Intuitively, it quantifies the minimum "cost" of transforming one probability distribution into another, where the cost is defined in terms of the distance between points in the space. Let's look at the example below.
 
-![Wasserstein Distance](wasserstein.png)
+![Wasserstein Distance](./wasserstein.png)
  from [this lecture](https://www.youtube.com/watch?v=CDiol4LG2Ao).
 
 The cost at i,j is defined as the amount of mass moved ($\pi_{ij}$) times the distance between the points ($d(x_i, y_j)$). The total cost is the sum of all individual costs.
@@ -29,9 +29,9 @@ $$
 
 For general probability measures with continuous support, the Wasserstein distance is defined as:
 
-![Continuous Wasserstein Distance](wasserstein-cont.png)
+![Continuous Wasserstein Distance](./wasserstein-cont.png)
 
-![Wasserstein Distance Formula](wasserstein-formula.png)
+![Wasserstein Distance Formula](./wasserstein-formula.png)
  from [this lecture](https://www.youtube.com/watch?v=gjcz3mQ3asw).
 
 ## Gromov-Wasserstein Distance
@@ -53,7 +53,7 @@ $$
 
 Now we can't use distance between points directly, since they are in different spaces. Instead, we look at the internal structure. 
 
-![Triangulars in Different Spaces](triangulars.png)
+![Triangulars in Different Spaces](./triangulars.png)
 
 Shape is... the relational structure formed by the distances between points. Even if two objects exist in entirely different coordinate systems, they can still have identical internal structures and thus represent the same shape.
 
@@ -189,7 +189,7 @@ pl.tight_layout()
 pl.show()
 ```
 
-![Distance Matrices Heatmap](heatmap.png)
+![Distance Matrices Heatmap](./heatmap.png)
 
 ```python
 gw_distance, transport_plan, log = compute_gromov_wasserstein(
@@ -231,7 +231,7 @@ print(f"Transport plan shape: {transport_plan.shape}")
 print(f"Transport plan sum: {transport_plan.sum():.6f} (should be ~1.0)")
 ```
 
-![Gromov-Wasserstein Transport Plan](transport-plan.png)
+![Gromov-Wasserstein Transport Plan](./transport-plan.png)
 
 ```
 Transport plan shape: (553, 579)
