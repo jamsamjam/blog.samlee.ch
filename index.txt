@@ -11,14 +11,14 @@ f:I[9665,[],"MetadataBoundary"]
 :HL["/_next/static/media/4cf2300e9c8272f7-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/93f479601ee12b01-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/css/322779b4ad3d28f4.css","style"]
-5:T1d84,
+5:T1d90,
 I’ve been working on a machine learning project involving the comparison of motion patterns extracted from dance videos. Our initial pipeline relied on DTW and several time-based distance metrics, but the results were not as robust as we expected. There was a suggestion to explore the Gromov–Wasserstein (GW) distance, and it turned out to be a very interesting idea! Let's start with..
 
 ## Wasserstein Distance
  
 Intuitively, it quantifies the minimum "cost" of transforming one probability distribution into another, where the cost is defined in terms of the distance between points in the space. Let's look at the example below.
 
-![Wasserstein Distance](wasserstein.png)
+![Wasserstein Distance](./wasserstein.png)
  from [this lecture](https://www.youtube.com/watch?v=CDiol4LG2Ao).
 
 The cost at i,j is defined as the amount of mass moved ($\pi_{ij}$) times the distance between the points ($d(x_i, y_j)$). The total cost is the sum of all individual costs.
@@ -36,9 +36,9 @@ $$
 
 For general probability measures with continuous support, the Wasserstein distance is defined as:
 
-![Continuous Wasserstein Distance](wasserstein-cont.png)
+![Continuous Wasserstein Distance](./wasserstein-cont.png)
 
-![Wasserstein Distance Formula](wasserstein-formula.png)
+![Wasserstein Distance Formula](./wasserstein-formula.png)
  from [this lecture](https://www.youtube.com/watch?v=gjcz3mQ3asw).
 
 ## Gromov-Wasserstein Distance
@@ -60,7 +60,7 @@ $$
 
 Now we can't use distance between points directly, since they are in different spaces. Instead, we look at the internal structure. 
 
-![Triangulars in Different Spaces](triangulars.png)
+![Triangulars in Different Spaces](./triangulars.png)
 
 Shape is... the relational structure formed by the distances between points. Even if two objects exist in entirely different coordinate systems, they can still have identical internal structures and thus represent the same shape.
 
@@ -196,7 +196,7 @@ pl.tight_layout()
 pl.show()
 ```
 
-![Distance Matrices Heatmap](heatmap.png)
+![Distance Matrices Heatmap](./heatmap.png)
 
 ```python
 gw_distance, transport_plan, log = compute_gromov_wasserstein(
@@ -238,7 +238,7 @@ print(f"Transport plan shape: {transport_plan.shape}")
 print(f"Transport plan sum: {transport_plan.sum():.6f} (should be ~1.0)")
 ```
 
-![Gromov-Wasserstein Transport Plan](transport-plan.png)
+![Gromov-Wasserstein Transport Plan](./transport-plan.png)
 
 ```
 Transport plan shape: (553, 579)
@@ -322,7 +322,7 @@ $$
 $$
 
 It can be interpreted as *the uncertainties in the position and momentum of a particle at any instant must have their product greater than or equal to half the reduced Planck constant*. we can't determine the momentum and the position of a particle sufficiently accurately. For a more detailed explanation of the Heisenberg Uncertainty Principle, see [here](https://www.youtube.com/watch?v=MBnnXbOM5S4).
-0:{"P":null,"b":"3Mtt5C7oQSItAVEw29OHw","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/322779b4ad3d28f4.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_188709 __variable_9a8899 antialiased","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"max-w-4xl mx-auto p-8","children":[["$","header",null,{"className":"mb-10","children":[["$","h1",null,{"className":"text-3xl font-bold mt-4 mb-1","children":"Sam's Blog"}],["$","p",null,{"className":"text-base text-gray-600 dark:text-gray-400","children":"On dev, tech, and whatever else I find interesting"}]]}],["$","$L4",null,{"posts":[{"slug":"gw-dist","title":"Gromov-Wasserstein Distance","date":"2025-12-04T14:58:07.000Z","description":"An overview of the Gromov-Wasserstein distance and its applications in my ML project","tags":["ML"],"content":"$5"},{"slug":"quantum-1","title":"Quantum #1: How to Understand Quantum","date":"2025-07-11T16:04:17.000Z","description":"An introduction to the fundamental concepts of quantum mechanics","tags":["Quantum"],"content":"$6"},{"slug":"app-icon","title":"Expo Build: App Icon Not Showing Up?","date":"2025-05-04T17:59:53.000Z","description":"How I fixed the missing app icon issue in Expo builds","tags":["App"],"content":"\nWhile building my app with Expo, I ran into a frustrating issue: the app icon wasn’t showing up in the final build. I had the correct `icon` path in `app.json`, but no matter what I tried it didn’t work, until I ran..\n\n\n```bash\nnpx expo prebuild --clean\nnpx expo prebuild\neas build --platform android --clear-cache\neas build --platform ios --clear-cache\n```\n\n![App Store Connect icons](./icon.png)\n\n**Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon. However, after I uploaded it on Apple Connecct it the icon appeared as expected.\n\n"}]}],["$","footer",null,{"className":"mt-3 pt-8 text-center","children":["$","p",null,{"className":"text-sm text-gray-500 dark:text-gray-400","children":["© 2025 ",["$","$L7",null,{"href":"https://samlee.ch","children":["$","span",null,{"className":"underline hover:text-gray-700 dark:hover:text-gray-300","children":"Sam Lee"}]}],". All rights reserved."]}]}]]}],null,["$","$L8",null,{"children":["$L9","$La",["$","$Lb",null,{"promise":"$@c"}]]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","XCOLhEFB7081SQGsyzauOv",{"children":[["$","$Ld",null,{"children":"$Le"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Lf",null,{"children":"$L10"}]]}],false]],"m":"$undefined","G":["$11","$undefined"],"s":false,"S":true}
+0:{"P":null,"b":"Rledcr-VQAjNweLUD4trg","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/322779b4ad3d28f4.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_188709 __variable_9a8899 antialiased","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"max-w-4xl mx-auto p-8","children":[["$","header",null,{"className":"mb-10","children":[["$","h1",null,{"className":"text-3xl font-bold mt-4 mb-1","children":"Sam's Blog"}],["$","p",null,{"className":"text-base text-gray-600 dark:text-gray-400","children":"On dev, tech, and whatever else I find interesting"}]]}],["$","$L4",null,{"posts":[{"slug":"gw-dist","title":"Gromov-Wasserstein Distance","date":"2025-12-04T14:58:07.000Z","description":"An overview of the Gromov-Wasserstein distance and its applications in my ML project","tags":["ML"],"content":"$5"},{"slug":"quantum-1","title":"Quantum #1: How to Understand Quantum","date":"2025-07-11T16:04:17.000Z","description":"An introduction to the fundamental concepts of quantum mechanics","tags":["Quantum"],"content":"$6"},{"slug":"app-icon","title":"Expo Build: App Icon Not Showing Up?","date":"2025-05-04T17:59:53.000Z","description":"How I fixed the missing app icon issue in Expo builds","tags":["App"],"content":"\nWhile building my app with Expo, I ran into a frustrating issue: the app icon wasn’t showing up in the final build. I had the correct `icon` path in `app.json`, but no matter what I tried it didn’t work, until I ran..\n\n\n```bash\nnpx expo prebuild --clean\nnpx expo prebuild\neas build --platform android --clear-cache\neas build --platform ios --clear-cache\n```\n\n![App Store Connect icons](./icon.png)\n\n**Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon. However, after I uploaded it on Apple Connecct it the icon appeared as expected.\n\n"}]}],["$","footer",null,{"className":"mt-3 pt-8 text-center","children":["$","p",null,{"className":"text-sm text-gray-500 dark:text-gray-400","children":["© 2025 ",["$","$L7",null,{"href":"https://samlee.ch","children":["$","span",null,{"className":"underline hover:text-gray-700 dark:hover:text-gray-300","children":"Sam Lee"}]}],". All rights reserved."]}]}]]}],null,["$","$L8",null,{"children":["$L9","$La",["$","$Lb",null,{"promise":"$@c"}]]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","95p7HwHpEcpcY_KnndpmYv",{"children":[["$","$Ld",null,{"children":"$Le"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Lf",null,{"children":"$L10"}]]}],false]],"m":"$undefined","G":["$11","$undefined"],"s":false,"S":true}
 12:"$Sreact.suspense"
 13:I[4911,[],"AsyncMetadata"]
 10:["$","div",null,{"hidden":true,"children":["$","$12",null,{"fallback":null,"children":["$","$L13",null,{"promise":"$@14"}]}]}]
