@@ -162,83 +162,20 @@ def compute_gw_from_distance_matrices(D1, D2, p=None, q=None, loss_fun='square_l
 >[!Note]
 > More general case with GW distance can be found in the [official doc](https://pythonot.github.io/auto_examples/gromov/plot_gromov.html).
 
-I loaded two dance videos and extracted pose keypoints (`poses1`, `poses2`) using MediaPipe. Each pose is represented as a set of 3D coordinates for various landmarks on the body.
-
-
-```python
-# necessary imports...
-
-D1, D2 = compute_distance_matrices(poses1, poses2)
-
-pl.figure(figsize=(12, 5))
-pl.subplot(121)
-pl.imshow(D1, cmap='viridis')
-pl.colorbar()
-pl.title("Distance Matrix: Video 1")
-pl.xlabel("Frame")
-pl.ylabel("Frame")
-
-pl.subplot(122)
-pl.imshow(D2, cmap='viridis')
-pl.colorbar()
-pl.title("Distance Matrix: Video 2")
-pl.xlabel("Frame")
-pl.ylabel("Frame")
-
-pl.tight_layout()
-pl.show()
-```
+I loaded a pair of dance videos from the same dance (`Video 1`, `Video 2`), another video from a completely different dance (`Video 3`), and extracted pose keypoints using MediaPipe. Each pose is represented as a set of 3D coordinates for various landmarks on the body.
 
 ![Distance Matrices Heatmap](./heatmap.png)
 
-```python
-gw_distance, transport_plan, log = compute_gromov_wasserstein(
-    poses1, poses2, 
-    verbose=True, 
-    log=True
-)
-
-print(f"\nGromov-Wasserstein Distance: {gw_distance:.6f}")
-```
+Interesting! Distance matrices of Video 1 and Video 2 look quite similar, while that of Video 3 shows more variation. What do you think? The computed GW distances are:
 
 ```
-It.  |Loss        |Relative loss|Absolute loss
-------------------------------------------------
-    0|3.458162e-02|0.000000e+00|0.000000e+00
-    1|1.794146e-02|9.274697e-01|1.664016e-02
-    2|1.203143e-02|4.912159e-01|5.910030e-03
-    3|1.000797e-02|2.021852e-01|2.023463e-03
-    4|9.375145e-03|6.749990e-02|6.328213e-04
-    5|9.034664e-03|3.768613e-02|3.404815e-04
-...
-   56|7.786634e-03|3.835101e-07|2.986253e-09
-   57|7.786634e-03|1.984439e-08|1.545210e-10
-
-Gromov-Wasserstein Distance: 0.007787
+Video 1 and Video 2: 0.008441
+Video 1 and Video 3: 0.008753
 ```
 
-```python
-pl.figure(figsize=(10, 8))
-pl.imshow(transport_plan, cmap='Blues', aspect='auto')
-pl.colorbar(label='Transport mass')
-pl.title('Gromov-Wasserstein Transport Plan')
-pl.xlabel('Video 2 Frames')
-pl.ylabel('Video 1 Frames')
-pl.tight_layout()
-pl.show()
-
-print(f"Transport plan shape: {transport_plan.shape}")
-print(f"Transport plan sum: {transport_plan.sum():.6f} (should be ~1.0)")
-```
+In absolute terms the values are close, but if you experiment with other video pairs, you'll notice a clear pattern: GW distances between similar dance styles consistently remain smaller than those between different styles.
 
 ![Gromov-Wasserstein Transport Plan](./transport-plan.png)
-
-```
-Transport plan shape: (553, 579)
-Transport plan sum: 1.000000 (should be ~1.0)
-```
-
-When two dance sequences are similar, the GW distance becomes smaller and the transport plan tends to show a clear diagonal structure that aligns frames across videos.
 
 >[!Important] Summary
 >- GW distance provides a flexible way to compare sequences with different lengths or coordinate systems.
