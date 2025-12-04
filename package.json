@@ -12,6 +12,7 @@
   "dependencies": {
     "gray-matter": "^4.0.3",
     "katex": "^0.16.22",
+    "lightningcss": "^1.30.2",
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
