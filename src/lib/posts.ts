@@ -21,13 +21,15 @@ export interface PostData {
 }
 
 export function getSortedPostsData(): PostData[] {
-  const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames
-    .filter(fileName => fileName.endsWith('.md'))
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, '')
-
-      const fullPath = path.join(postsDirectory, fileName)
+  const folderNames = fs.readdirSync(postsDirectory)
+  const allPostsData = folderNames
+    .filter(folderName => {
+      const folderPath = path.join(postsDirectory, folderName)
+      return fs.statSync(folderPath).isDirectory()
+    })
+    .map((folderName) => {
+      const slug = folderName
+      const fullPath = path.join(postsDirectory, folderName, `${folderName}.md`)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
 
       const matterResult = matter(fileContents)
@@ -52,20 +54,23 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames
-    .filter(fileName => fileName.endsWith('.md'))
-    .map((fileName) => {
+  const folderNames = fs.readdirSync(postsDirectory)
+  return folderNames
+    .filter(folderName => {
+      const folderPath = path.join(postsDirectory, folderName)
+      return fs.statSync(folderPath).isDirectory()
+    })
+    .map((folderName) => {
       return {
         params: {
-          slug: fileName.replace(/\.md$/, '')
+          slug: folderName
         }
       }
     })
 }
 
 export async function getPostData(slug: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`)
+  const fullPath = path.join(postsDirectory, slug, `${slug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
   const matterResult = matter(fileContents)
