@@ -8,15 +8,15 @@ c:I[9665,[],"MetadataBoundary"]
 e:I[6614,[],""]
 :HL["/_next/static/media/4cf2300e9c8272f7-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/93f479601ee12b01-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/css/322779b4ad3d28f4.css","style"]
-0:{"P":null,"b":"Rledcr-VQAjNweLUD4trg","p":"","c":["","posts","gw-dist",""],"i":false,"f":[[["",{"children":["posts",{"children":[["slug","gw-dist","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/322779b4ad3d28f4.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_188709 __variable_9a8899 antialiased","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["posts",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","gw-dist","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":["$L6","$L7",["$","$L8",null,{"promise":"$@9"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","dz4IMsNNlNJYAHognG2i_v",{"children":[["$","$La",null,{"children":"$Lb"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Lc",null,{"children":"$Ld"}]]}],false]],"m":"$undefined","G":["$e","$undefined"],"s":false,"S":true}
+:HL["/_next/static/css/fe8ce8f764dddb50.css","style"]
+0:{"P":null,"b":"kXhudBOHdKfyWPEYh0QLl","p":"","c":["","posts","gw-dist",""],"i":false,"f":[[["",{"children":["posts",{"children":[["slug","gw-dist","d"],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/fe8ce8f764dddb50.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_188709 __variable_9a8899 antialiased","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["posts",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["slug","gw-dist","d"],["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L4",null,["$","$L5",null,{"children":["$L6","$L7",["$","$L8",null,{"promise":"$@9"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","pizcELu4dN6WPZPxG-Hm6v",{"children":[["$","$La",null,{"children":"$Lb"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Lc",null,{"children":"$Ld"}]]}],false]],"m":"$undefined","G":["$e","$undefined"],"s":false,"S":true}
 f:"$Sreact.suspense"
 10:I[4911,[],"AsyncMetadata"]
 d:["$","div",null,{"hidden":true,"children":["$","$f",null,{"fallback":null,"children":["$","$L10",null,{"promise":"$@11"}]}]}]
 7:null
 12:I[6874,["874","static/chunks/874-7618c3fad5f7ba4a.js","858","static/chunks/app/posts/%5Bslug%5D/page-7f765a2b5edd9539.js"],""]
 14:I[6220,["874","static/chunks/874-7618c3fad5f7ba4a.js","858","static/chunks/app/posts/%5Bslug%5D/page-7f765a2b5edd9539.js"],"default"]
-13:Tf88a,<p>I’ve been working on a machine learning project involving the comparison of motion patterns extracted from dance videos. Our initial pipeline relied on DTW and several time-based distance metrics, but the results were not as robust as we expected. There was a suggestion to explore the Gromov–Wasserstein (GW) distance, and it turned out to be a very interesting idea! Let's start with..</p>
+13:Tf584,<p>I’ve been working on a machine learning project involving the comparison of motion patterns extracted from dance videos. Our initial pipeline relied on DTW and several time-based distance metrics, but the results were not as robust as we expected. There was a suggestion to explore the Gromov–Wasserstein (GW) distance, and it turned out to be a very interesting idea! Let's start with..</p>
 <h2>Wasserstein Distance</h2>
 <p>Intuitively, it quantifies the minimum "cost" of transforming one probability distribution into another, where the cost is defined in terms of the distance between points in the space. Let's look at the example below.</p>
 <p><img src="/posts/gw-dist/wasserstein.png" alt="Wasserstein Distance"><br>
@@ -170,69 +170,17 @@ def compute_gw_from_distance_matrices(D1, D2, p=None, q=None, loss_fun='square_l
 <p><br>
 More general case with GW distance can be found in the <a href="https://pythonot.github.io/auto_examples/gromov/plot_gromov.html">official doc</a>.</p>
 </div>
-<p>I loaded two dance videos and extracted pose keypoints (<code>poses1</code>, <code>poses2</code>) using MediaPipe. Each pose is represented as a set of 3D coordinates for various landmarks on the body.</p>
-<pre><code class="language-python"># necessary imports...
-
-D1, D2 = compute_distance_matrices(poses1, poses2)
-
-pl.figure(figsize=(12, 5))
-pl.subplot(121)
-pl.imshow(D1, cmap='viridis')
-pl.colorbar()
-pl.title("Distance Matrix: Video 1")
-pl.xlabel("Frame")
-pl.ylabel("Frame")
-
-pl.subplot(122)
-pl.imshow(D2, cmap='viridis')
-pl.colorbar()
-pl.title("Distance Matrix: Video 2")
-pl.xlabel("Frame")
-pl.ylabel("Frame")
-
-pl.tight_layout()
-pl.show()
-</code></pre>
+<p>I loaded a pair of dance videos from the same dance (<code>Video 1</code>, <code>Video 2</code>), another video from a completely different dance (<code>Video 3</code>), and extracted pose keypoints using MediaPipe. Each pose is represented as a set of 3D coordinates for various landmarks on the body.</p>
 <p><img src="/posts/gw-dist/heatmap.png" alt="Distance Matrices Heatmap"></p>
-<pre><code class="language-python">gw_distance, transport_plan, log = compute_gromov_wasserstein(
-    poses1, poses2, 
-    verbose=True, 
-    log=True
-)
-
-print(f"\nGromov-Wasserstein Distance: {gw_distance:.6f}")
+<p>Interesting! Distance matrices of Video 1 and Video 2 look quite similar, while that of Video 3 shows more variation. What do you think? The computed GW distances are:</p>
+<pre><code>Video 1 and Video 2: 0.008441
+Video 1 and Video 3: 0.008753
 </code></pre>
-<pre><code>It.  |Loss        |Relative loss|Absolute loss
-------------------------------------------------
-    0|3.458162e-02|0.000000e+00|0.000000e+00
-    1|1.794146e-02|9.274697e-01|1.664016e-02
-    2|1.203143e-02|4.912159e-01|5.910030e-03
-    3|1.000797e-02|2.021852e-01|2.023463e-03
-    4|9.375145e-03|6.749990e-02|6.328213e-04
-    5|9.034664e-03|3.768613e-02|3.404815e-04
-...
-   56|7.786634e-03|3.835101e-07|2.986253e-09
-   57|7.786634e-03|1.984439e-08|1.545210e-10
-
-Gromov-Wasserstein Distance: 0.007787
-</code></pre>
-<pre><code class="language-python">pl.figure(figsize=(10, 8))
-pl.imshow(transport_plan, cmap='Blues', aspect='auto')
-pl.colorbar(label='Transport mass')
-pl.title('Gromov-Wasserstein Transport Plan')
-pl.xlabel('Video 2 Frames')
-pl.ylabel('Video 1 Frames')
-pl.tight_layout()
-pl.show()
-
-print(f"Transport plan shape: {transport_plan.shape}")
-print(f"Transport plan sum: {transport_plan.sum():.6f} (should be ~1.0)")
-</code></pre>
+<p>In absolute terms the values are close, but if you experiment with other video pairs, you'll notice a clear pattern: GW distances between similar dance styles consistently remain smaller than those between different styles.</p>
 <p><img src="/posts/gw-dist/transport-plan.png" alt="Gromov-Wasserstein Transport Plan"></p>
-<pre><code>Transport plan shape: (553, 579)
-Transport plan sum: 1.000000 (should be ~1.0)
-</code></pre>
-<p>When two dance sequences are similar, the GW distance becomes smaller and the transport plan tends to show a clear diagonal structure that aligns frames across videos.</p>
+<p>Well, I find it a bit hard to draw conclusions from the transport plan itself, but looking at the column sums provides some insights.</p>
+<p><img src="/posts/gw-dist/column-sum.png" alt="Column-sum of Transport Plan"></p>
+<p>The column sums indicate how much each frame in Video 2 is matched to frames in Video 1. For similar dances, the distribution is more concentrated, suggesting that specific frames correspond closely. In contrast, for different dances, the distribution is more spread out, indicating less direct correspondence.</p>
 <div class="markdown-alert markdown-alert-important">
 <p class="markdown-alert-title"><span class="octicon octicon-important" style="--oct-icon: url(&#x22;data:image/svg+xml;utf8,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; class=&#x27;octicon octicon-report mr-2&#x27; viewBox=&#x27;0 0 16 16&#x27; version=&#x27;1.1&#x27; width=&#x27;16&#x27; height=&#x27;16&#x27; aria-hidden=&#x27;true&#x27;%3E%3Cpath d=&#x27;M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z&#x27;%3E%3C/path%3E%3C/svg%3E&#x22;)"></span>Summary</p>
 <p></p>
