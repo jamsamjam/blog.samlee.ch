@@ -2,7 +2,7 @@
 title: "Different Ways to View a Linear System"
 tags: ["LinAlg"]
 date: "2026-02-08T13:56:43Z"
-description: "Notes from Gilbert Strang’s lecture series 1-2."
+description: "Notes from Gilbert Strang’s lecture series 1-2"
 ---
 
 Linear Algebra is sooo important! So I've decided to revisit it during my winter break! I'll be posting my notes here :)
@@ -42,7 +42,7 @@ $$
 
 - Row picture
 
-![Row picture of the linear system](row-picture.png)
+![Row picture of the linear system](./row-picture.png)
 
 This is classic! A row is a linear equation, so we're gonna look at it row by row, aka equation by equation. Graphically, it's the same as looking at the intersection of two lines in 2D space. The solution to the system is the point where these two lines intersect ($x=1, y=2$).
 
@@ -69,7 +69,7 @@ y
 \end{bmatrix}
 $$
 
-![Column picture of the linear system](column-picture.png)
+![Column picture of the linear system](./column-picture.png)
 
 This was not so intuitive to me at first.. but let's see it this way..
 

@@ -1,14 +1,14 @@
 ---
-title: "$3^{-1} = \frac{1}{3}$. What is $A^{-1}$?"
+title: "3⁻¹ = 1/3. What is A⁻¹?"
 tags: ["LinAlg"]
 date: "2026-02-13T18:08:43Z"
-description: "Notes from Gilbert Strang’s lecture series 3."
+description: "Notes from Gilbert Strang’s lecture series 3"
 ---
 
 
 # 1. Multiplication and Inverse Matrices
 
-# 1.1. $AB = C$
+## 1.1. $AB = C$
 
 $$
 \begin{align*}
