@@ -2,196 +2,607 @@
 2:I[7555,[],""]
 3:I[1295,[],""]
 4:I[8388,["874","static/chunks/874-7618c3fad5f7ba4a.js","974","static/chunks/app/page-d0f3ce9bc5a66fb6.js"],"default"]
-6:I[6874,["874","static/chunks/874-7618c3fad5f7ba4a.js","974","static/chunks/app/page-d0f3ce9bc5a66fb6.js"],""]
-7:I[9665,[],"OutletBoundary"]
-a:I[4911,[],"AsyncMetadataOutlet"]
-c:I[9665,[],"ViewportBoundary"]
-e:I[9665,[],"MetadataBoundary"]
-10:I[6614,[],""]
+7:I[6874,["874","static/chunks/874-7618c3fad5f7ba4a.js","974","static/chunks/app/page-d0f3ce9bc5a66fb6.js"],""]
+8:I[9665,[],"OutletBoundary"]
+b:I[4911,[],"AsyncMetadataOutlet"]
+d:I[9665,[],"ViewportBoundary"]
+f:I[9665,[],"MetadataBoundary"]
+11:I[6614,[],""]
 :HL["/_next/static/media/4cf2300e9c8272f7-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/93f479601ee12b01-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/css/fe8ce8f764dddb50.css","style"]
-5:T18cf,
-I’ve been working on a machine learning project involving the comparison of motion patterns extracted from dance videos. Our initial pipeline relied on DTW and several time-based distance metrics, but the results were not as robust as we expected. There was a suggestion to explore the Gromov–Wasserstein (GW) distance, and it turned out to be a very interesting idea! Let's start with..
+:HL["/_next/static/css/a156cf9c722202ff.css","style"]
+5:T1639,
 
-## Wasserstein Distance
- 
-Intuitively, it quantifies the minimum "cost" of transforming one probability distribution into another, where the cost is defined in terms of the distance between points in the space. Let's look at the example below.
+# 1. Multiplication and Inverse Matrices
 
-![Wasserstein Distance](./wasserstein.png)
- from [this lecture](https://www.youtube.com/watch?v=CDiol4LG2Ao).
-
-The cost at i,j is defined as the amount of mass moved ($\pi_{ij}$) times the distance between the points ($d(x_i, y_j)$). The total cost is the sum of all individual costs.
+# 1.1. $AB = C$
 
 $$
-d_{W_1}\!\left( \sum_i \alpha_i \delta_{x_i},\; \sum_j \beta_j \delta_{y_j} \right)
-= \min_{\{\pi_{ij}\}} \left\{
-    \sum_{i,j} \pi_{ij} \, d(x_i, y_j)
-    \;:\;
-    \pi_{ij} \ge 0,\;
-    \sum_i \pi_{ij} = \beta_j,\;
-    \sum_j \pi_{ij} = \alpha_i
-\right\}.
+\begin{align*}
+C_{34} &= (\text{3rd row of A}) * (\text{4th column of B}) \\
+&= a_{31} b_{14} + a_{32} b_{24} + a_{33} b_{34} + ... \\
+&= \sum_{k=1}^n a_{3k} b_{k4}
+\end{align*}
 $$
 
-For general probability measures with continuous support, the Wasserstein distance is defined as:
-
-![Continuous Wasserstein Distance](./wasserstein-cont.png)
-
-![Wasserstein Distance Formula](./wasserstein-formula.png)
- from [this lecture](https://www.youtube.com/watch?v=gjcz3mQ3asw).
-
-## Gromov-Wasserstein Distance
-
-What if two distributions we want to compare do not live in the same space? For example, we have two graphs with different numbers of nodes, and we want to compare their structures. This is where the Gromov-Wasserstein distance comes into play.
+We can generalize this to the whole matrix:
 
 $$
-GW_p(X,Y)
-\;=\;
-\inf_{\pi \in \Pi(\mu_X, \mu_Y)}
-\left(
-\int_{X \times Y}
-\int_{X \times Y}
-\big| d_X(x,x') - d_Y(y,y') \big|^p
-\;
-d\pi(x,y)\, d\pi(x',y')
-\right)^{1/p}.
+C_{ij} = \sum_{k=1}^n A_{ik} B_{kj}
 $$
 
-Now we can't use distance between points directly, since they are in different spaces. Instead, we look at the internal structure. 
+If $A$ is $m \times n$ and $B$ is $n \times p$, then the resulting matrix $C$ will be $m \times p$. If this is confusing at first, think about a simple example. A row of $A$ will be multiplied by $p$ columns of $B$, and this will be repeated for all $m$ rows of $A$.
 
-![Triangulars in Different Spaces](./triangulars.png)
+### 1.1.1. Column at A Time
 
-Shape is... the relational structure formed by the distances between points. Even if two objects exist in entirely different coordinate systems, they can still have identical internal structures and thus represent the same shape.
-
-Look at the cost function, we are minimizing the difference in pairwise distances within each space, weighted by the transport plan $\pi$.
-
-## GW Distance in Python
-
-All good! But how to compute coupling π(i,j)? In principle, computing the exact GW coupling requires solving a non convex quadratic optimization problem, which is computationally challenging. In practice, we instead use an entropic regularized version
+Now, let's look at it as a product of matrix $A$ and column $j$ of $B$.
 
 $$
-\min_{\pi} \left(
-    \sum_{i,i',j,j'} 
-        \pi(i,j)\,\pi(i',j') \,
-        \big| d_X(x_i, x_{i'}) - d_Y(y_j, y_{j'}) \big|
-    \;+\;
-    \varepsilon\, \mathrm{KL}\!\left(\pi \,\middle\|\, \mu_X \otimes \mu_Y \right)
-\right)
+\begin{pmatrix}
+A
+\end{pmatrix}
+\begin{pmatrix}
+| & | & & | \\
+B_1 & B_2 & \cdots & B_p \\
+| & | & & |
+\end{pmatrix}
+=
+\begin{pmatrix}
+| & | & & | \\
+C_1 & C_2 & \cdots & C_p \\
+| & | & & |
+\end{pmatrix}
 $$
 
-In Python, we can use the `POT` (Python Optimal Transport) library to compute the GW distance. Here's a simple example:
+Each row of $A$ is multiplied by each column of $B$ to produce the corresponding entry in $C$. We've already seen this in 2.2:
 
-```python
-import numpy as np
-import scipy as sp
-import ot
+$$
+\text{matrix} \times \text{vector} = \text{vector}
+$$
 
+The columns of $C$ are linear combinations of the **columns of $A$**. (See *Super Important!* in the last post.)
 
-def _flatten_poses(poses):
-    n_frames = len(poses)
-    n_landmarks = poses[0].shape[0]
-    # Mediapipe pose landmarks are 3D so each frame is flattened into xyz coordinates.
-    return poses[:, :, :3].reshape(n_frames, n_landmarks * 3)
+### 1.1.2. Row at A Time
 
+$$
+\begin{pmatrix}
+- & A_1 & - \\
+- & A_2 & - \\
+& \vdots & \\
+- & A_m & -
+\end{pmatrix}
+\begin{pmatrix}
+- & B_1 & - \\
+- & B_2 & - \\
+& \vdots & \\
+- & B_n & -
+\end{pmatrix}
+=
+\begin{pmatrix}
+- & C_1 & - \\
+- & C_2 & - \\
+& \vdots & \\
+- & C_m & -
+\end{pmatrix}
+$$
 
-def compute_distance_matrices(poses1, poses2):
-    X1 = _flatten_poses(poses1)
-    X2 = _flatten_poses(poses2)
-    
-    D1 = sp.spatial.distance.cdist(X1, X1)
-    D2 = sp.spatial.distance.cdist(X2, X2)
-    
-    D1 /= D1.max()
-    D2 /= D2.max()
-    
-    return D1, D2
+The rows of $C$ are linear combinations of the **rows of $B$**.
 
+$$
+C_{ij} = \sum_{k=1}^n A_{ik} B_{kj}
+$$
 
-def compute_gromov_wasserstein(poses1, poses2, verbose=False, log=False):
-    X1 = _flatten_poses(poses1)
-    X2 = _flatten_poses(poses2)
-    
-    D1 = sp.spatial.distance.cdist(X1, X1)
-    D2 = sp.spatial.distance.cdist(X2, X2)
-    
-    D1 /= D1.max()
-    D2 /= D2.max()
-    
-    p = ot.unif(len(X1))
-    q = ot.unif(len(X2))
-    
-    gw_distance, log_dict = ot.gromov.gromov_wasserstein2(
-        D1, D2, p, q, 
-        loss_fun='square_loss',
-        verbose=verbose,
-        log=True
-    )
-    
-    transport_plan = ot.gromov.gromov_wasserstein(
-        D1, D2, p, q,
-        loss_fun='square_loss',
-        verbose=verbose
-    )
-    
-    if log:
-        return gw_distance, transport_plan, log_dict
-    
-    return gw_distance, transport_plan
+$$
+\begin{align*}
+C_i &= \sum_{k=1}^n A_{ik} (B_{k1}, \dots, B_{kp}) \\
+&= A_{i1} B_1 + A_{i2} B_2 + \cdots + A_{in} B_n
+\end{align*}
+$$
 
+>[!Tip]
+> The columns of $C$ are linear combinations of the **columns** of $A$, and the rows of $C$ are linear combinations of the **rows** of $B$.
 
-def compute_gw_from_distance_matrices(D1, D2, p=None, q=None, loss_fun='square_loss', verbose=False, log=False):
-    if p is None:
-        p = ot.unif(D1.shape[0])
-    if q is None:
-        q = ot.unif(D2.shape[0])
-    
-    gw_distance, log_dict = ot.gromov.gromov_wasserstein2(
-        D1, D2, p, q,
-        loss_fun=loss_fun,
-        verbose=verbose,
-        log=True
-    )
-    
-    transport_plan = ot.gromov.gromov_wasserstein(
-        D1, D2, p, q,
-        loss_fun=loss_fun,
-        verbose=verbose
-    )
-    
-    if log:
-        return gw_distance, transport_plan, log_dict
-    
-    return gw_distance, transport_plan
+### 1.1.3. Column Times Row
 
-```
+$$
+\text{column of A} \times \text{row of B} = \text{matrix}
+$$
+
+$$
+\begin{pmatrix}
+2 \\
+3 \\
+4
+\end{pmatrix}
+\begin{pmatrix}
+1 & 6
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 & 12 \\
+3 & 18 \\
+4 & 24
+\end{pmatrix}
+$$
+
+It's a very special matrix! The columns are multiples of $(2, 3, 4)$ and the rows are multiples of $[1, 6]$.
+
+$$
+AB = \sum \text{columns of A} \times \text{rows of B}
+$$
+
+$$
+\begin{pmatrix}
+2 & 7\\
+3 & 8\\
+4 & 9
+\end{pmatrix}
+\begin{pmatrix}
+1 & 6 \\
+0 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 \\
+3 \\
+4
+\end{pmatrix}
+\begin{pmatrix}
+1 & 6
+\end{pmatrix}
++
+\begin{pmatrix}
+7 \\
+8 \\
+9
+\end{pmatrix}
+\begin{pmatrix}
+0 & 0
+\end{pmatrix}
+$$
+
+## 1.2. Block Multiplication
+
+Suppose we have two square matrices $A$ and $B$ of size $n \times n$. Guess whay? We can multiply them block by block!
+
+$$
+A =
+\begin{bmatrix}
+A_1 & A_2 \\
+A_3 & A_4
+\end{bmatrix},
+\quad
+B =
+\begin{bmatrix}
+B_1 & B_2 \\
+B_3 & B_4
+\end{bmatrix}
+$$
+$$
+AB =
+\begin{bmatrix}
+A_1B_1 + A_2B_3 & A_1B_2 + A_2B_4 \\
+A_3B_1 + A_4B_3 & A_3B_2 + A_4B_4
+\end{bmatrix}
+$$
+
+It may not be very straightforward to see why this works, but you can see it works by hand. I think it's enough here to know that we can do this.
+
+## 1.3. Inverses (Square Matrix)
+
+### 1.3.1. Existence of Inverse
+
+Not all matrices have inverses. If $A^{-1}$ exists (= invertible, non-singular), ..
+
+$$
+AA^{-1} = A^{-1}A = I
+$$
+
+Why a matrix wouldn't have an inverse (singular) ?
+
+$$
+\begin{pmatrix}
+1 & 3 \\
+2 & 6
+\end{pmatrix}
+$$
+
+1. Determinant of this matrix is zero.
+
+2. Suppose there is an inverse matrix $A^{-1}$, then when we multiply $A$ by $A^{-1}$, the result should be combination of the columns of $A$. But they lie on the same line, so we can never get the identity matrix $I$.
+
+3. If we can find a vector $x$ such that $Ax = 0$, then $A$ is singular. In this case, $x = (3, -1)$.
+
+$$
+\begin{pmatrix}
+1 & 3 \\
+2 & 6
+\end{pmatrix}
+\begin{pmatrix}
+3 \\
+-1
+\end{pmatrix}
+=
+\begin{pmatrix}0 \\
+0
+\end{pmatrix}
+$$
+
+Why this is an issue for an inverse?
+
+$$
+Ax = 0
+$$
+
+$$
+\begin{align*}
+A^{-1} A x &= x = 0
+\end{align*}
+$$
+
+But $x$ was not zero!
+
+>[!Caution] Important!
+> If a combination of the columns of $A$ can give you the zero vector, then $A$ is singular and does not have an inverse. In other words, if there is a non-zero vector $x$ such that $Ax = 0$, then $A$ is singular.
+
+### 1.3.2. Gauss-Jordan
+
+$$
+\begin{pmatrix}
+1 & 3 \\
+2 & 7
+\end{pmatrix}
+\begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+$$
+
+Finding the inverse is like solving the system.
+
+$$
+A \times \text{column } j \text{ of } A^{-1} = \text{column } j \text{ of } I
+$$
+
+**Gauss-Jordan** can solve two equations at once.
+
+$$
+\begin{pmatrix}
+1 & 3 \\
+2 & 7
+\end{pmatrix}
+\begin{pmatrix}
+a \\
+b
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+$$
+
+$$
+\begin{pmatrix}
+1 & 3 \\
+2 & 7
+\end{pmatrix}
+\begin{pmatrix}
+c \\
+d
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+$$
+
+Jordan once said, we can..
+
+$$
+\begin{pmatrix}
+1 & 3 & | & 1 & 0 \\
+2 & 7 & | & 0 & 1
+\end{pmatrix}
+$$
+
+$$
+\rightarrow
+\begin{pmatrix}
+1 & 3 & | & 1 & 0 \\
+0 & 1 & | & -2 & 1
+\end{pmatrix}
+$$
+
+Now that we have the upper triangular, Gauss would have said to quit, but Jordan said keep going!
+
+$$
+\rightarrow
+\begin{pmatrix}
+1 & 0 & | & 7 & -3 \\
+0 & 1 & | & -2 & 1
+\end{pmatrix}
+$$
+
+We have found the inverse matrix.
+
+$$
+A^{-1} =
+\begin{pmatrix}
+7 & -3 \\
+-2 & 1
+\end{pmatrix}
+$$
+
+Again, what was confusing for me in the beginning is that it is not clear why we can do this. Well, you can check $A \times A^{-1} = I$, but why does it work?
+
+As we are doing elimination steps, we are multiplying $A$ by some matrice $E$'s.
+
+$$
+E(AI) = IE
+$$
+
+Wait, we have $EA = I$? Then what is $E$?
+
+$$
+E = A^{-1}
+$$
+
+$$
+E(AI) = IA^{-1}
+$$6:T13d0,
+Linear Algebra is sooo important! So I've decided to revisit it during my winter break! I'll be posting my notes here :)
+
+# 1. The Geometry of Linear Equations
+
+## 1.1 Solving a System of Linear Equations
+
+$$
+\begin{align*}
+x - 2y &= 1 \\
+3x + 2y &= 11
+\end{align*}
+$$
+
+- Matrix view
+
+$$
+\begin{bmatrix}
+1 & -2 \\
+3 & 2
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \\
+11
+\end{bmatrix}
+$$
+
+$$
+Ax = b
+$$
+
+- Row picture
+
+![Row picture of the linear system](row-picture.png)
+
+This is classic! A row is a linear equation, so we're gonna look at it row by row, aka equation by equation. Graphically, it's the same as looking at the intersection of two lines in 2D space. The solution to the system is the point where these two lines intersect ($x=1, y=2$).
+
+This is easy in two dimensions, but in higher dimensions we might be lost!
+
+- **Column picture***
+
+$$
+x
+\begin{bmatrix}
+1 \\
+3
+\end{bmatrix}
++
+y
+\begin{bmatrix}
+-2 \\
+2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \\
+11
+\end{bmatrix}
+$$
+
+![Column picture of the linear system](column-picture.png)
+
+This was not so intuitive to me at first.. but let's see it this way..
+
+Each column is related to a variable, so we can think of the system as a vector of coefficients, aka **linear combination of columns**. We need a right combination of $x$ and $y$ -- $x$ amount of $(1, 3)$, and $y$ amount of $(-2, 2)$ -- to get the final vector $(1, 11)$.
+
+>[!Caution] Super Important!
+> $b$ is a linear combination of the columns of $A$.
+
+Graphically, we would start by drawing two vectors of unit length, and then see how much we need to scale them to get to the target vector.
 
 >[!Note]
-> More general case with GW distance can be found in the [official doc](https://pythonot.github.io/auto_examples/gromov/plot_gromov.html).
+> Here we notice with all the combinations of $x$ and $y$, we can fill the whole plane. Is it always the case? Do the linear combinations of n columns always fill the n-dimensional space? It's interesting to think about when this is not the case.
 
-I loaded a pair of dance videos from the same dance (`Video 1`, `Video 2`), another video from a completely different dance (`Video 3`), and extracted pose keypoints using MediaPipe. Each pose is represented as a set of 3D coordinates for various landmarks on the body.
+# 2. Elimination with Matrices
 
-![Distance Matrices Heatmap](./heatmap.png)
+## 2.1 Elimination & Back-Substitution
 
-Interesting! Distance matrices of Video 1 and Video 2 look quite similar, while that of Video 3 shows more variation. What do you think? The computed GW distances are:
+It's simple if we can just reduce a n-dimensional matrix to upper triangular form with n pivots, following Gaussian elimination. We also know its determinant (product of all the pivots) and inverse. (But the world is not always nice and easy. Sometimes we have fewer pivots than dimensions.)
 
-```
-Video 1 and Video 2: 0.008441
-Video 1 and Video 3: 0.008753
-```
+With the upper triangular matrix $U$, we can solve for the variables starting from the last one and moving upwards. This is called back-substitution.
 
-In absolute terms the values are close, but if you experiment with other video pairs, you'll notice a clear pattern: GW distances between similar dance styles consistently remain smaller than those between different styles.
+We can make an augmented matrix. This way we can solve for multiple right-hand sides at once, which is useful when we have to solve the same system with different b's.
 
-![Gromov-Wasserstein Transport Plan](./transport-plan.png)
+## 2.2. Matrices
 
->[!Important] Summary
->- GW distance provides a flexible way to compare sequences with different lengths or coordinate systems.
->- For motion analysis in particular, it captures structural similarity beyond simple time alignment and serves as a strong complement to DTW based methods.0:{"P":null,"b":"w0axgblYyYFpEt9X1y_NM","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/fe8ce8f764dddb50.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_188709 __variable_9a8899 antialiased","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"max-w-4xl mx-auto p-8","children":[["$","header",null,{"className":"mb-10","children":[["$","h1",null,{"className":"text-3xl font-bold mt-4 mb-1","children":"Sam's Blog"}],["$","p",null,{"className":"text-base text-gray-600 dark:text-gray-400","children":"On dev, tech, and whatever else I find interesting"}]]}],["$","$L4",null,{"posts":[{"slug":"gw-dist","title":"Gromov-Wasserstein Distance","date":"2025-12-04T14:58:07.000Z","description":"An overview of the Gromov-Wasserstein distance and its applications in my ML project","tags":["ML"],"content":"$5"},{"slug":"app-icon","title":"Expo Build: App Icon Not Showing Up?","date":"2025-05-04T17:59:53.000Z","description":"How I fixed the missing app icon issue in Expo builds","tags":["App"],"content":"\nWhile building my app with Expo, I ran into a frustrating issue: the app icon wasn’t showing up in the final build. I had the correct `icon` path in `app.json`, but no matter what I tried it didn’t work, until I ran..\n\n\n```bash\nnpx expo prebuild --clean\nnpx expo prebuild\neas build --platform android --clear-cache\neas build --platform ios --clear-cache\n```\n\n![App Store Connect icons](./icon.png)\n\n**Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon. However, after I uploaded it on Apple Connecct it the icon appeared as expected.\n\n"}]}],["$","footer",null,{"className":"mt-3 pt-8 text-center","children":["$","p",null,{"className":"text-sm text-gray-500 dark:text-gray-400","children":["© 2025 ",["$","$L6",null,{"href":"https://samlee.ch","children":["$","span",null,{"className":"underline hover:text-gray-700 dark:hover:text-gray-300","children":"Sam Lee"}]}],". All rights reserved."]}]}]]}],null,["$","$L7",null,{"children":["$L8","$L9",["$","$La",null,{"promise":"$@b"}]]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","nPs_6285s-qnN6NymK6wiv",{"children":[["$","$Lc",null,{"children":"$Ld"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Le",null,{"children":"$Lf"}]]}],false]],"m":"$undefined","G":["$10","$undefined"],"s":false,"S":true}
-11:"$Sreact.suspense"
-12:I[4911,[],"AsyncMetadata"]
-f:["$","div",null,{"hidden":true,"children":["$","$11",null,{"fallback":null,"children":["$","$L12",null,{"promise":"$@13"}]}]}]
+>[!Note]
+> $$\text{matrix} \times \text{column} = \text{column}$$
+> If we multiply a matrix by a vector, we get a linear combination of the columns of the matrix.
+
+If we multiply a row vector by a matrix, we get a linear combination of the **rows** of the matrix. What's the matrix that does subtraction?
+
+Subtract 3 * row 1 from row 2:
+
+$$
+\begin{pmatrix}
+?
+\end{pmatrix}
+\begin{pmatrix}
+1 & 2 & 1 \\
+3 & 8 & 1 \\
+0 & 4 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 2 & 1 \\
+0 & 2 & -2 \\
+0 & 4 & 1
+\end{pmatrix}
+$$
+
+Look at the result matrix row by row. How to get $[1, 2, 1]$? We need 1 * (row 1) and 0 of others, so the first row of the $?$ matrix is $[1, 0, 0]$. If we didn't do anything, the $?$ matrix would have been the identity matrix.
+
+To get $[0, 2, -2]$, we need -3 * (row 1) and 1 * (row 2). So the second row of the $?$ matrix is $[-3, 1, 0]$.
+
+$$
+\begin{pmatrix}
+1 & 0 & 0 \\
+-3 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 2 & 1 \\
+3 & 8 & 1 \\
+0 & 4 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 2 & 1 \\
+0 & 2 & -2 \\
+0 & 4 & 1
+\end{pmatrix}
+$$
+
+Let's call our $?$ matrix $E_{21}$, which means we are doing elimination to get a zero in the $(2, 1)$ position. In a similar way, we can get $E_{32} as below.
+
+$$
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -2 & 1
+\end{pmatrix}
+$$
+
+Let's put everything we did in a single matrix $E$:
+
+$$
+E_{32} (E_{21} A) = U
+$$
+$$
+E A = U
+$$
+
+>[!Warning]
+> We can remove the parentheses but not change the orders.
+
+A **permutation matrix**, let's say here a matrix that exchanges rows 1 and 2:
+
+$$
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+=
+\begin{pmatrix}
+c & d \\
+a & b
+\end{pmatrix}
+$$
+
+$$
+P
+=
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+$$
+
+It's fun to think about what matrix would exchange columns instead of rows. Where do I put it? On the right!
+
+$$
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+b & a \\
+d & c
+\end{pmatrix}
+$$
+
+## 2.3. Peeking in Inverses
+
+$$
+\begin{pmatrix}
+1 & 0 & 0 \\
+-3 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+$$
+
+I wanna find a matrix undoes this step and gives us the identity.
+
+Instead of subtracting 3 * row 1 from row 2, we can **add** 3 * row 1 to row 2:
+
+$$
+\begin{pmatrix}
+1 & 0 & 0 \\
+3 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 & 0 \\
+-3 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+$$
+
+$$
+E^{-1} E = I
+$$0:{"P":null,"b":"GW0Z7AI6M4sut37rEXhkw","p":"","c":["",""],"i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/a156cf9c722202ff.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"className":"__variable_188709 __variable_9a8899 antialiased","children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"max-w-4xl mx-auto p-8","children":[["$","header",null,{"className":"mb-10","children":[["$","h1",null,{"className":"text-3xl font-bold mt-4 mb-1","children":"Sam's Blog"}],["$","p",null,{"className":"text-base text-gray-600 dark:text-gray-400","children":"On dev, tech, and whatever else I find interesting"}]]}],["$","$L4",null,{"posts":[{"slug":"linalg-2","title":"$$3^{-1} = \frac{1}{3}$. What is $A^{-1}$?","date":"2026-02-13T18:08:43Z","description":"Notes from Gilbert Strang’s lecture series 3.","tags":["LinAlg"],"content":"$5"},{"slug":"linalg-1","title":"Different Ways to View a Linear System","date":"2026-02-08T13:56:43Z","description":"Notes from Gilbert Strang’s lecture series 1-2.","tags":["LinAlg"],"content":"$6"},{"slug":"app-icon","title":"Expo Build: App Icon Not Showing Up?","date":"2025-05-04T17:59:53.000Z","description":"How I fixed the missing app icon issue in Expo builds","tags":["App"],"content":"\nWhile building my app with Expo, I ran into a frustrating issue: the app icon wasn’t showing up in the final build. I had the correct `icon` path in `app.json`, but no matter what I tried it didn’t work, until I ran..\n\n\n```bash\nnpx expo prebuild --clean\nnpx expo prebuild\neas build --platform android --clear-cache\neas build --platform ios --clear-cache\n```\n\n![App Store Connect icons](./icon.png)\n\n**Note:** The icon still didn’t show up correctly in Apple’s Transporter. It kept displaying the default gray grid icon. However, after I uploaded it on Apple Connecct it the icon appeared as expected.\n\n"}]}],["$","footer",null,{"className":"mt-3 pt-8 text-center","children":["$","p",null,{"className":"text-sm text-gray-500 dark:text-gray-400","children":["© 2025 ",["$","$L7",null,{"href":"https://samlee.ch","children":["$","span",null,{"className":"underline hover:text-gray-700 dark:hover:text-gray-300","children":"Sam Lee"}]}],". All rights reserved."]}]}]]}],null,["$","$L8",null,{"children":["$L9","$La",["$","$Lb",null,{"promise":"$@c"}]]}]]}],{},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","dl2f_vtLwuCdiU3pg_4L9v",{"children":[["$","$Ld",null,{"children":"$Le"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Lf",null,{"children":"$L10"}]]}],false]],"m":"$undefined","G":["$11","$undefined"],"s":false,"S":true}
+12:"$Sreact.suspense"
+13:I[4911,[],"AsyncMetadata"]
+10:["$","div",null,{"hidden":true,"children":["$","$12",null,{"fallback":null,"children":["$","$L13",null,{"promise":"$@14"}]}]}]
+a:null
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 9:null
-d:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-8:null
-b:{"metadata":[["$","title","0",{"children":"Sam's Blog"}],["$","meta","1",{"name":"description","content":"On dev, tech, and whatever else I find interesting"}],["$","link","2",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}]],"error":null,"digest":"$undefined"}
-13:{"metadata":"$b:metadata","error":null,"digest":"$undefined"}
+c:{"metadata":[["$","title","0",{"children":"Sam's Blog"}],["$","meta","1",{"name":"description","content":"On dev, tech, and whatever else I find interesting"}],["$","link","2",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"16x16"}]],"error":null,"digest":"$undefined"}
+14:{"metadata":"$c:metadata","error":null,"digest":"$undefined"}
