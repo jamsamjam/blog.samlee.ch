@@ -1,8 +1,8 @@
 ---
-title: "Linear Algebra 1: Title"
-tags: ["LA"]
-date: "2026-02-08T13:56:43.3NZ"
-description: "Notes from Gilbert Strang’s lectures 1-3."
+title: "Different Ways to View a Linear System"
+tags: ["LinAlg"]
+date: "2026-02-08T13:56:43Z"
+description: "Notes from Gilbert Strang’s lecture series 1-2."
 ---
 
 Linear Algebra is sooo important! So I've decided to revisit it during my winter break! I'll be posting my notes here :)
@@ -74,6 +74,9 @@ $$
 This was not so intuitive to me at first.. but let's see it this way..
 
 Each column is related to a variable, so we can think of the system as a vector of coefficients, aka **linear combination of columns**. We need a right combination of $x$ and $y$ -- $x$ amount of $(1, 3)$, and $y$ amount of $(-2, 2)$ -- to get the final vector $(1, 11)$.
+
+>[!Caution] Super Important!
+> $b$ is a linear combination of the columns of $A$.
 
 Graphically, we would start by drawing two vectors of unit length, and then see how much we need to scale them to get to the target vector.
 
@@ -153,12 +156,14 @@ $$
 Let's put everything we did in a single matrix $E$:
 
 $$
-E_{32} (E_{21} A) = U \\
+E_{32} (E_{21} A) = U
+$$
+$$
 E A = U
 $$
 
 >[!Warning]
-> We can remove the parantheses but not change the orders.
+> We can remove the parentheses but not change the orders.
 
 A **permutation matrix**, let's say here a matrix that exchanges rows 1 and 2:
 
@@ -241,6 +246,3 @@ $$
 $$
 E^{-1} E = I
 $$
-
-# 3. Multiplication and Inverse Matrices
-
